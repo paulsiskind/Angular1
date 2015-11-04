@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app>
+  <head>
+    <meta charset="utf-8">
+    <title>{{ greeting }} World</title>
+  </head>
+  <body>
+    <input type="text" placeholder="What is your name?" ng-model="name">
+    <h1>My name is: {{name}}</h1>
+    <p> 1 + 2= {{1+2}} </p>
+    <p> My name is {{'Harry' + 'Hood'}}</p>
+    <p> The array [22,33,33] is {{[22,33,33].length}} items long!</p>
+    
+    <p> {{3.14159265359 | currency: '€'}} </p>
+    
+    <p>Please Say Something</p>
+    <input type="text" ng-model="jefe">
+    <h1>Yell: {{ jefe| uppercase}} </h1>
+    <h2>Whisper: {{jefe | lowercase}}</h2>
+
+
+    <p>{{3.14159265359 | number:3}}</p>
+    <p>{{3.14159265359 | number:6}}</p>
+    <p>{{3.14159265359 | number:1}}</p>
+
+    
+   <h2>How Many Digits of Pi? <select ng-model="numberPi">
+      <option value= 1>1</option>
+      <option value= 2>2</option>
+      <option value= 3>3</option>
+      <option value= 4>4</option>
+      <option value= 5>5</option>
+      <option value= 6>6</option>
+      <option value= 7>7</option>
+    </select></h2>
+   <h2> Here you go the first {{numberPi}} digits of Pi!</h2>
+   <p>{{3.14159265359 | number: numberPi}}</p>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app="madlibApp">
+  <head>
+    <meta charset="utf-8">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <title>MadLibs</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular.min.js"></script>
+  </head>
+  <body>
+  <div class="container">
+   <div class="col-md-6">
+   <div class="page-header">
+    <h1 class="well"> Please Fill Out the Following? </h1>
+   </div>
+    
+    <div class="form" ng-controller="madlibCtrl">
+      <h2>Boy"s Name</h2>
+        <input type="text" placeholder="Please Enter a Boy's Name" class="form-control" ng-model="newContact.name" >
+      <h2>Enter an Adjective</h2>
+        <input type="text" placeholder="Please Enteran Adjective" class="form-control" ng-model="newContact.adjective">
+      <h2>Plural Noun</h2>
+        <input type="text" placeholder="Please Enter a Plural Noun" class="form-control" ng-model="newContact.pluralNoun">
+      <h2>An Insect Plural</h2>
+        <input type="text" placeholder="Please Enter a Plural Insect" class="form-control" ng-model="newContact.insect">
+      <h2>Plural Noun</h2>
+        <input type="text" placeholder="Please Enter a Plural Noun" class="form-control" ng-model="newContact.nounPlural">
+      <h2>Verb Ending in S</h2>
+        <input type="text" placeholder="Please Enter a Verb Ending in S" class="form-control "ng-model="newContact.verbs">
+      
+
+      <button class="btn btn-lg btn-success" ng-click="populateForm()">Generate</button>
+
+      <h3>
+        I"m in love with 
+          <i>{{contact.name}}</i>. 
+        He"s so 
+          <i>{{contact.adjective}}</i>! 
+        He has big flat 
+          <i>{{contact.pluralNoun}}</i>, and when our 
+          <i>{{contact.insect}}</i> meet, I get 
+          <i>{{contact.nounPlural}}</i> in my stomach. 
+        I"ve fallen for him like a ton of 
+          <i>{{contact.verbs}}</i>, and he shuffles for me, too. But I think he"s got another girlfriend. What should I do?
+      </h3>
+      
+      <button class="btn btn-lg btn-danger" ng-click="deleteForm()">Clear</button>
+    </div>
+
+  
+    <script type="text/javascript">
+      var madlib = angular.module("madlibApp", [])
+      
+      madlib.controller("madlibCtrl", ["$scope", function($scope) {
+        $scope.populateForm = function() {
+          $scope.contact = $scope.newContact;
+          $scope.newContact = {};
+        };
+        $scope.deleteForm = function() {
+          $scope.newContact = {};
+        };
+      }]);
+      
+    </script>
+
+  </body>
+</html>
