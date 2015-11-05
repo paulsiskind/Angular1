@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="practiceApp">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ greeting }} World</title>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular.min.js"></script>
+  </head>
+  <body>
+    <script type="text/javascript">
+     var practiceApp = angular.module('practiceApp', []);
+     practiceApp.controller('MainController', function($scope){
+      $scope.second = [
+    {name:"mike", age:23},
+    {name:"andy", age:34},
+    {name:"reid", age:45},
+    {name:"reid", age:45}
+  ];
+   })
+    </script>
+    <div ng-controller="MainController">
+
+    <!--     <ul>
+          <li ng-repeat="name in names track by $index">
+            {{name}}
+           </li>
+        </ul> -->
+      <div ng-repeat-start="user in second">
+          <strong>{{ user.name }}</strong>: {{ user.age }}
+      </div>
+      <hr ng-repeat-end>
+
+
+      <div ng-show="3 + 2 == 5">
+        3 + 4 isn't 5, don't show
+      </div>
+
+      <div ng-show="3 + 4 == 7">
+        3 + 4 is 7, do show
+      </div>
+
+      <div ng-hide="3 + 4 == 5">
+          3 + 4 isn't 5, don't hide
+      </div>
+
+      <div ng-hide="3 + 4 == 7">
+        3 + 4 is 7, do hide
+
+
+      </div>
+
+
+
+  </body>
+</html>

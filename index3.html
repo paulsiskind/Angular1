@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app="practiceApp">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ greeting }} World</title>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular.min.js"></script>
+  </head>
+  <body>
+    <script type="text/javascript">
+     var practiceApp = angular.module('practiceApp', []);
+     practiceApp.controller('MainController', function($scope){
+      $scope.names = ["&spades;", "&clubs;", "&hearts;", "&diams;"];
+   })
+    </script>
+    <div ng-controller="MainController">
+
+        <ul>
+          <li ng-repeat="name in names">
+            {{name}}
+           </li>
+        </ul>
+
+
+  </body>
+</html>
