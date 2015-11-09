@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <meta charset="utf-8">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <title>Something Great</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular.min.js"></script>
+
+  </head>
+    <body>
+    <div class="container">
+       <div ng-controller="appCtrl">
+        <h1 class= "well"> Contact App</h1>
+          <div class="form-group">
+            <h5>Name<input type="text" ng-model="new.name">Email
+            <input type="text" ng-model="new.email"> Phone
+            <input type="text" ng-model="new.phone">
+            <button class="btn btn-success" ng-click="submit()">Submit
+            </button></h5>
+            <br>
+            <h5 > Search <input type="text" ng-model="search" </h5>
+          </div>
+
+         <table class="table table-striped">
+          <thead>
+             <tr>
+               <th> Name </th>
+               <th> Email </th>
+               <th> Phone </th>
+             </tr>
+           <thead>
+           <tbody> 
+             
+             <tr ng-repeat="log in logged | filter: search">
+                <td>{{log.name}} </td>
+                <td>{{log.email}}</td>
+                <td>{{log.phone}}</td>
+             </tr>
+            </tbody> 
+          </div>
+
+     <script type="text/javascript">
+      var doSomething = angular.module("app", [])
+      doSomething.controller("appCtrl", ["$scope", function($scope) {
+        $scope.logged=[
+        {name: "Paul", email: "paulsiskind@gmail.com", phone:'530-386-0690'}
+        ]
+        
+         $scope.submit = function(){
+         $scope.logged.push($scope.new);
+         $scope.new = {};
+        }
+        
+
+     
+      }])
+
+
+    </script>
+    </body>
+</html>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
-    <title>MadLibs</title>
+    <title>Photo App</title>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular.min.js"></script>
     <style>
        .highlight{
@@ -25,8 +25,8 @@
         <h5> {{camera.title}} </h5>
         <h5> Rating: {{camera.rating}} </h5>
         <h5 ng-class="{highlight: camera.onSale}"> Price: {{camera.price | currency}} </h5>
-        <img src="http://www.gravatar.com/avatar/{{camera.image}}" alt="Description"/>
-        <h5> {{camera.onSale}} </h5>
+        <img ng-src="http://www.gravatar.com/avatar/{{camera.image}}" alt="Description"/>
+        
 
        </div>
        <hr ng-repeat-end>

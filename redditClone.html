@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <meta charset="utf-8">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <title>Something Great</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular-animate.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+
+<!-- load angular-moment -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-moment/0.9.0/angular-moment.min.js"></script>
+    <style>
+
+   img{
+    width: 75%;
+   }
+   .jumbotron{
+    background-color: brown;
+   }
+   </style>
+   </head>
+<body>
+        <div ng-controller="appCtrl">
+         <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#">Reddit Clone</a>
+            </div>
+            <div>
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#" ng-click="showme=true">Submit Post</a></li>
+                <li><input type="text" ng-model="search" placeholder="search"></li> 
+                <li><a href="#" ng-click='sortPost()'>Sort By Something or other</a></li> 
+              </ul>
+            </div>
+          </div>
+        </nav>
+             <div class='container'>
+               <div class='form' ng-show="showme">
+                <h1 class= "well">Reddit App</h1>
+                <h3>Title</h3>
+                <input type='text' class='form-control' placeholder='Ttile' ng-model='form.title'>
+                <h3> Author</h3>
+                <input type='text' class='form-control' placeholder='Author' ng-model='form.author'>
+                <h3>Image URL</h3>
+                <input type='text' class='form-control' placeholder='Image URL' ng-model='form.url'>
+                <h3>Description<h3>
+                <input type='text' class='form-control' placeholder='Description' ng-model='form.description'> </br>
+                <button class='btn btn-success' ng-click="formButton(); showme=false">
+                Submit</button>
+                {{form}}
+             </div>
+           
+             <div class="jumbotron" ng-repeat="display in displays | filter: search ">
+               <div class="col-md-2">
+                 <img src= {{display.url}} alt="Picture"></img>
+               </div>
+               <div class="col-md-8">
+                 <h3>{{display.title}}
+                  <span class="glyphicon glyphicon-arrow-up" ng-click="upVote()"></span>
+                  <span class="glyphicon glyphicon-arrow-down" ng-click-"downVote(display.id)"></span>
+                  {{display.votes}}</h3>
+               </div>
+                 <p>{{display.author}}</p>
+               <div class="col-md-10">
+                 <p>{{display.description}}</p>
+                 <p>{{ display.date | amCalendar}}</p>
+               <!--   <time title="{{display.date | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}">{{ display.time | amCalendar }}</time> -->
+               </div>
+               <div class="col-md-10">
+                 <p ng-click='commentShow=true'>Comment</p>
+                 <div ng-show="commentShow" class="form">
+                  <h4> Author<input type="text" ng-model="commentNew.author"> Comment<input type="text" ng-model="commentNew.comment">
+                    <button class="btn btn-success" ng-click=" commentShow=false; commentPost()">Submit</button> </h4>
+                 </div>
+                   <div ng-repeat=z"comment in display.comments">
+                   <h5><strong>{{comment.author}}</strong>: {{comment.comment}}</h5>
+                 </div>
+              
+             </div>
+           </div>
+         </div>
+
+
+
+
+
+             <script type="text/javascript">
+              var doSomething = angular.module("app", ['angularMoment'])
+              doSomething.controller("appCtrl", ["$scope", function($scope) {
+                // $scope.displays.votes =0;
+                $scope.displays = [{title: 'The Mysterious Green Toad',
+                                   author: 'Humbert Humperdinck',
+                                   url:"http://img.timeinc.net/time/photoessays/2010/top10_invasive/cane_toad.jpg",
+                                   description: "Something Green, Something blue, something purple, neon , orange colred brains",
+                                   comments: [{
+                                       author:"Jack Sparrow",
+                                       comment: "Arr, Matey!  I smell something fishy!"}],
+                                   votes: 0
+                                 },
+                                 {title: "Illmatic",
+                                  author: "NAS",
+                                  url: "http://static.vibe.com/files/article_images/94-week-king-of-new-york-biggie-nas.jpg",
+                                  description:"Aclaimed as the Greatest the greatest hip hop album of all time. ",
+                                   comments:[{
+                                          author: "Bog George",
+                                          comment: "I slept with Prince"}],
+                                   votes: 2
+                                },
+                                {
+                                  title: "Crazy Gringo",
+                                  author: "Jode",
+                                  url: "http://cmsimg.news-leader.com/apps/pbcsi.dll/bilde?Site=DO&Date=20100927&Category=NEWS0102&ArtNo=9270346&Ref=AR&MaxW=640&Border=0&Bull-riding-full-thrills-even-you-re-not-riding",
+                                  description: "Crazy Gringos taking over the world!",
+                                  comments:[{
+                                         author: "Jude Law",
+                                         comment: "damn damn"}],
+                                  votes: 10
+                                }
+
+                                   ]
+
+               
+
+                 $scope.commentPost = function(id){
+                  $scope.displays.comments.push($scope.commentNew);
+                  $scope.commentNew = {};
+
+                 }                  
+                 $scope.formButton = function(){
+                 // $scope.transfer = $scope.form;
+                 var date = new Date;
+                 $scope.displays.push({ title: this.form.title,
+                                      author: this.form.author,
+                                      url: this.form.url,
+                                      description: this.form.description,
+                                      votes: 0,
+                                      comments: [],
+                                      date: date});
+                 $scope.form = {};
+                };
+                $scope.upVote = function(){
+                  this.displays.votes ++;
+                }
+                 $scope.downVote = function(){
+                  this.displays.votes --;
+                }
+             
+              }])
+
+
+            </script>
+             <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+             <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular.min.js"></script>
+             <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+             <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.9.0/angular-moment.min.js"></script>
+             <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.1/angular-animate.js"></script>
+ </body>
+</html>

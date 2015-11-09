@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <meta charset="utf-8">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <title>Something Great</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular.min.js"></script>
+    <style>
+    .highlight{
+               background-color: green;
+    }
+    h1{
+      text-align: center;
+    }
+    button{
+      position-align: center;
+    }
+    
+    </style>
+  </head>
+    <body>
+    <div class="container">
+       <div ng-controller="appCtrl">
+        <h1 class="text-align: center">Ping Pong Score Keeper!</h1>
+        <div class="col-md-6">
+          <div class= "jumbotron" ng-click="playerOne()" ng-class="{highlight: playerOneScore == 11}" >
+            <h1>Player 1</h1>
+            <h1>{{playerOneScore}}</h1>
+            <h5 ng-show= "master ? $odd">
+             Now Serving
+            </h5>
+            </div></div>
+        <div class="col-md-6">
+          <div class= "jumbotron" ng-click="playerTwo()" ng-class="{highlight: playerTwoScore == 11}">
+            <h1>Player 2</h1>
+            <h1>{{playerTwoScore}}</h1>
+            <h5 ng-show= "master ? $even">
+             Now Serving
+            </h5>
+            </div> </div>
+       <p>{{master}}</p>
+        <button ng-click="reset()" class="btn btn-success">Reset</button>
+       </div>
+
+    </div>
+     <script type="text/javascript">
+      var doSomething = angular.module("app", [])
+      doSomething.controller("appCtrl", ["$scope", function($scope) {
+          $scope.playerOneScore = 0;
+          $scope.playerTwoScore = 0;
+          $scope.master = 0;
+         $scope.playerOne = function(){
+
+          $scope.playerOneScore += 1;
+          $scope.master +=1;
+          if($scope.playerOneScore == 12){
+            return $scope.playerOneScore=0;
+
+          }
+         }
+         $scope.playerTwo = function(){
+          $scope.playerTwoScore += 1;
+          $scope.master += 1;
+          if($scope.playerTwoScore == 12){
+            return $scope.playerTwoScore=0;
+          }
+         }
+
+         $scope.reset = function(){
+          $scope.playerOneScore = 0;
+          $scope.playerTwoScore = 0;
+          $scope.master = 0;
+         }
+      
+         $scope.pickRandomNumber = function(){
+         $scope.number = Math.floor(Math.random() * 10) + 1
+         };
+         $scope.reverseString = function(){
+         $scope.tacos = $scope.reverseIt
+         $scope.reverseIt = $scope.tacos.split('').reverse().join('');
+        };
+      }])
+
+
+    </script>
+    </body>
+</html>
